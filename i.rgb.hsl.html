@@ -1,0 +1,30 @@
+<h2 id="description">DESCRIPTION</h2>
+<p><em>i.rgb.his</em> is an image processing program that processes three input raster map layers as red, green, and blue components and produces three output raster map layers representing the hue, intensity, and saturation of the data. The output raster map layers are created by a standard red-green-blue (RGB) to hue-intensity-saturation (HIS) color transformation. Each output raster map layer is given a linear gray scale color table. The current geographic region definition and mask settings are respected.</p>
+<h2 id="examples">EXAMPLES</h2>
+<h2 id="bit">8-bit</h2>
+<p>The digital numbers for the 8-bit Landsat 7 bands red, green and blue, range between 0 and 255:</p>
+<p><code>for BAND in 10 20 30 ;do echo</code>echo -e &quot;Band <span class="math inline">${BAND}: &quot; &amp;&amp; r.info -r lsat7_2002_$</span>BAND<code>;done</code></p>
+<pre><code>Band 10: min=42 max=255
+Band 20: min=28 max=255
+Band 30: min=1 max=255</code></pre>
+<p>Coverting these to hue, saturation and lightness:</p>
+<p><code>i.rgb.hsl r=lsat7_2002_30 g=lsat7_2002_20 bl=lsat7_2002_10 hue=h lightness=l saturation=s</code></p>
+<p>The output images range within:</p>
+<p><code>for DIMENSION in h s l; do echo</code>echo &quot;${DIMENSION}:&quot; &amp;&amp; r.info -r ${DIMENSION}` ;done</p>
+<pre><code>h: min=0 max=359.434
+s: min=0 max=1
+l: min=0.08431373 max=1</code></pre>
+<p>Note, the <em>bits</em> option is set to 8 by default. Since the input images, in this examele, are 8-bit, there is no need to modify it.</p>
+<p>Converting back to the original RGB color space using <a href="i.hsl.rgb" class="uri">i.hsl.rgb</a>:</p>
+<p><code>i.hsl.rgb hue=h saturation=s lightness=l r=red g=green bl=blue</code></p>
+<p>Confirming that the range of the values of the output images red, green and blue, is identical to the range of the input Landsat 7 bands:</p>
+<p><code>for IMAGE in red green blue ;do echo \</code>echo -e &quot;${IMAGE}: &quot; &amp;&amp; r.info -r $IMAGE` ;done`</p>
+<pre><code>red: min=0 max=255
+green: min=28 max=255
+blue: min=42 max=255</code></pre>
+<h2 id="bit-1">16-bit</h2>
+<h2 id="see-also">SEE ALSO</h2>
+<p><em><a href="i.hsl.rgb.html">i.hsl.rgb</a>, <a href="i.rgb.his.html">i.rgb.his</a>, <a href="i.his.rgb.html">i.his.rgb</a>, <a href="r.colors.html">r.colors</a></em></p>
+<h2 id="author">AUTHOR</h2>
+<p>Nikos Alexandris</p>
+<p><em>Last changed: $Date: 2016-01-28 12:21:34 +0100 (Thu, 28 Jan 2016) $</em></p>

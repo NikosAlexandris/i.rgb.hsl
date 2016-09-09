@@ -1,19 +1,7 @@
-
-/******************************************************************************
-NAME:        RGB2HSL
- 
-PURPOSE      Process red, green and blue bands (RGB) to hue, saturation and
-             lightness (HSL)
-  
-             Get red, green, blue from input buffer
-             Create the HSL bands
-             Write to output buffer as FCELL
-   
-ASSUMPTION:  The input images are read to the input buffer.
- 
-******************************************************************************/
-/* For GRASS one row from each cell map is passed in and each cell in
-   each band is processed and written out.   CWU GIS Lab: DBS 8/90 */
+/*
+ * PURPOSE      Convert red, green and blue color values into properties of the
+ *              HSL color space model hue, saturation and lightness model
+ */
 
 #include <grass/gis.h>
 #include <grass/glocale.h>
@@ -44,12 +32,13 @@ for (column = 0; column < columns; column++) {
 
     if (Rast_is_d_null_value(&rowbuffer[0][column]) ||
         Rast_is_d_null_value(&rowbuffer[1][column]) ||
-        Rast_is_d_null_value(&rowbuffer[2][column])) {
-            Rast_set_d_null_value(&rowbuffer[0][column], 1);
-            Rast_set_d_null_value(&rowbuffer[1][column], 1);
-            Rast_set_d_null_value(&rowbuffer[2][column], 1);
-            continue;
-        }
+        Rast_is_d_null_value(&rowbuffer[2][column]))
+    {
+        Rast_set_d_null_value(&rowbuffer[0][column], 1);
+        Rast_set_d_null_value(&rowbuffer[1][column], 1);
+        Rast_set_d_null_value(&rowbuffer[2][column], 1);
+        continue;
+    }
 
     /* scale r, g, b to [0.0,1.0] */
 
@@ -89,19 +78,16 @@ for (column = 0; column < columns; column++) {
 
 
     /* if R == G == B, then min == max, which is achromatic */
-
     if (chroma == 0.0) {
 
         saturation = 0.0;
 
         /* undefined hue, set to -1. */
-
         hue = -1.0;
 
     }
 
     /*  else chromatic */
-
     else if (chroma != 0.0) {
 
         saturation = chroma / (1.0 - fabs(2.0 * lightness - 1.0));
@@ -124,14 +110,14 @@ for (column = 0; column < columns; column++) {
 
     }
 
-    G_debug(2, "Maximum level among r, g, b: %f", max);
-    G_debug(2, "Minimum level among r, g, b: %f", min);
+    G_debug(2, "Minimum and Maximum levels among r, g, b: [%f, %f]", min, max);
     G_debug(2, "Lightness: %f", lightness);
 
     /* HSL output values */
 
     /* set hue = -1 to NULL */
-    if (hue == -1.0) {
+    if (hue == -1.0)
+    {
         Rast_set_d_null_value(&rowbuffer[0][column], 1);
     }
     else

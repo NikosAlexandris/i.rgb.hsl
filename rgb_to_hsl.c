@@ -17,7 +17,7 @@
 void rgb_to_hsl(DCELL *rowbuffer[3], unsigned int columns, double max_level)
 
 {
-    unsigned int column;         // column indicator
+    unsigned int column;// column indicator
     double red;         // red input image
     double green;       // green input image
     double blue;        // blue input image
@@ -83,8 +83,8 @@ for (column = 0; column < columns; column++) {
 
         saturation = 0.0;
 
-        /* undefined hue, set to 369 -- is this safe? */
-        hue = 369;
+        /* undefined hue, set to -1.0 */
+        hue = -1.0;
 
     }
 
@@ -119,8 +119,8 @@ for (column = 0; column < columns; column++) {
 
     /* HSL output values */
 
-    /* set hue = 369 to NULL */
-    if (hue == 369)
+    /* set hue = -1.0 to NULL */
+    if (hue == -1.0)
     {
         Rast_set_d_null_value(&rowbuffer[0][column], 1);
     }

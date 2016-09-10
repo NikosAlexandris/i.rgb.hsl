@@ -57,7 +57,7 @@ int main(int argc, char **argv)
     G_add_keyword("red");
     G_add_keyword("green");
     G_add_keyword("blue");
-    G_add_keyword("HSL");i          // Lightness, Luminosity or Luminance
+    G_add_keyword("HSL");           // Lightness, Luminosity or Luminance
     G_add_keyword("hue");
     G_add_keyword("saturation");
     G_add_keyword("lightness");

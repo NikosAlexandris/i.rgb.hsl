@@ -8,7 +8,7 @@
  */
 
 int close_files(char *hue, char *saturation, char *lightness,
-               int fd_output[3], DCELL * output_rowbuffer[3])
+               int fd_output[3], DCELL *output_rowbuffer[3])
 {
     int row;
     struct Colors colors;

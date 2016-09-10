@@ -14,13 +14,13 @@
  * maximum level of range 2^bit_depth
  */
 
-void rgb_to_hsl(DCELL *rowbuffer[3], int columns, double max_level)
+void rgb_to_hsl(DCELL *rowbuffer[3], unsigned int columns, double max_level)
 
 {
-    int column;         // column indicator
-    double red;         // the red band output
-    double green;       // the green band output
-    double blue;        // the blue band output
+    unsigned int column;         // column indicator
+    double red;         // red input image
+    double green;       // green input image
+    double blue;        // blue input image
     double min;         // minimum among red, green, blue
     double max;         // maximum among red, green, blue
     float chroma;       // chrome, intermediate value
@@ -83,8 +83,8 @@ for (column = 0; column < columns; column++) {
 
         saturation = 0.0;
 
-        /* undefined hue, set to -1. */
-        hue = -1.0;
+        /* undefined hue, set to 369 -- is this safe? */
+        hue = 369;
 
     }
 
@@ -119,8 +119,8 @@ for (column = 0; column < columns; column++) {
 
     /* HSL output values */
 
-    /* set hue = -1 to NULL */
-    if (hue == -1.0)
+    /* set hue = 369 to NULL */
+    if (hue == 369)
     {
         Rast_set_d_null_value(&rowbuffer[0][column], 1);
     }

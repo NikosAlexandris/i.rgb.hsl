@@ -11,15 +11,15 @@
  * input rowbuffer
  */
 void open_files(char *, char *, char *,
-               char *, char *, char *,
-               int[3], int[3],
-               DCELL *[3]);
+                char *, char *, char *,
+                int[3], int[3],
+                DCELL *[3]);
 
 /*
  * rgb_to_hsl.c
  * input rowbuffer, columns, maximum range value
  */
-void rgb_to_hsl(DCELL *[3], int, double);
+void rgb_to_hsl(DCELL *[3], unsigned int, double);
 
 /*
  * close_files.c
@@ -28,7 +28,7 @@ void rgb_to_hsl(DCELL *[3], int, double);
  * output rowbuffers
  */
 int close_files(char *, char *, char *,
-               int[3],
-               DCELL *[3]);
+                int[3],
+                DCELL *[3]);
 
 #endif /* __GLOBALS_H__ */

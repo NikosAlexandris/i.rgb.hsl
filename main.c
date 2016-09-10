@@ -4,7 +4,6 @@
  * MODULE:      i.rgb.hsl
  *
  * AUTHOR(S):   Nikos Alexandris
- *              submitted in GRASS-GIS' trac ticket #774
  *
  * PURPOSE:     Color space conversion, RGB to HSL
  *
@@ -32,8 +31,8 @@
 
 int main(int argc, char **argv)
 {
-    long row;                                /* long is 32-/64-bit, ~4 billion/~18 qunitillion */
-    int band, rows, cols;                    /* input band counter, number of rows, columns */
+    long row;                       // long is 32-/64-bit, ~4 billion/~18 qunitillion
+    int band, rows, cols;           // input band counter, number of rows, columns
     DCELL *rowbuffer[3];
     struct Option *opt_red;
     struct Option *opt_green;
@@ -42,14 +41,13 @@ int main(int argc, char **argv)
     struct Option *opt_saturation;
     struct Option *opt_lightness;
     struct Option *opt_bits;
-    struct GModule *module;
-    int fd_input[3];                        /* input file descriptors */
-    int fd_output[3];                       /* output file descriptors */
-    int bits;                          /* bitness of input raster maps */
-    double max_colors;                       /* maximum level based on input bitness */
+    struct GModule *module;         // GRASS module for parsing arguments
+    int fd_input[3];                // input file descriptors
+    int fd_output[3];               // output file descriptors
+    int bits;                       // bitness of input raster maps
+    double max_colors;              // maximum level based on input bitness
 
-    /* Initialize GIS engine */
-    G_gisinit(argv[0]);
+    G_gisinit(argv[0]);             // initialize GIS engine
 
     /* Set description */
     module = G_define_module();
@@ -59,7 +57,7 @@ int main(int argc, char **argv)
     G_add_keyword("red");
     G_add_keyword("green");
     G_add_keyword("blue");
-    G_add_keyword("HSL");                   /* Lightness, Luminosity or Luminance */
+    G_add_keyword("HSL");i          // Lightness, Luminosity or Luminance
     G_add_keyword("hue");
     G_add_keyword("saturation");
     G_add_keyword("lightness");
@@ -103,7 +101,6 @@ int main(int argc, char **argv)
     if (G_parser(argc, argv))
         exit(EXIT_FAILURE);
 
-
     /* bit depth, should be > 0 */
     bits = atoi(opt_bits->answer);
     if (bits <= 0)
@@ -113,15 +110,14 @@ int main(int argc, char **argv)
     max_colors = pow(2, bits) - 1.0;
     G_debug(1, "%d-bit data ranging in [0,%.0f)", bits, max_colors);
 
-
     /* get image dimensions */
     rows = Rast_window_rows();
     cols = Rast_window_cols();
 
     /* open files */
     open_files(opt_red->answer, opt_green->answer, opt_blue->answer,
-              opt_hue->answer, opt_saturation->answer, opt_lightness->answer,
-              fd_input, fd_output, rowbuffer);
+               opt_hue->answer, opt_saturation->answer, opt_lightness->answer,
+               fd_input, fd_output, rowbuffer);
 
     /* read in maps per row*/
     for (row = 0; row < rows; row++) {
@@ -144,7 +140,7 @@ int main(int argc, char **argv)
 
     /* close files */
     close_files(opt_hue->answer, opt_saturation->answer, opt_lightness->answer,
-               fd_output, rowbuffer);
+                fd_output, rowbuffer);
 
     exit(EXIT_SUCCESS);
 }

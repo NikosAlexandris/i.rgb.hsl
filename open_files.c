@@ -12,12 +12,12 @@
  */
 
 void open_files(char *red, char *green, char *blue,
-               char *hue, char *saturation, char *lightness,
-               int fd_input[3], int fd_output[3],
-               DCELL *rowbuffer[3])
+                char *hue, char *saturation, char *lightness,
+                int fd_input[3], int fd_output[3],
+                DCELL *rowbuffer[3])
 {
     /* declarations */
-    /* const char *mapset;                     /1* mapset name *1/ */
+    /* const char *mapset;              // pointer for mapset
 
     /* RASTER_MAP_TYPE red_data_type; */
     /* RASTER_MAP_TYPE green_data_type; */

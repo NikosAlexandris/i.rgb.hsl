@@ -31,7 +31,6 @@ int close_files(char *hue, char *saturation, char *lightness,
     Rast_get_fp_range_min_max(&range, &min, &max);
     Rast_make_grey_scale_fp_colors(&colors, min, max);
     Rast_write_colors(hue, mapset, &colors);
-    G_debug(1, "Wrote color table for %s", hue);
 
     Rast_read_fp_range(lightness, mapset, &range);
     Rast_get_fp_range_min_max(&range, &min, &max);

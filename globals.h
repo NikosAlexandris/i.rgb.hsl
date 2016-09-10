@@ -3,8 +3,8 @@
 
 #include <grass/raster.h>
 
-/* 
- * open_files.c 
+/*
+ * open_files.c
  * red, green, blue
  * hue, saturation, lightness,
  * input file descriptors, output file descriptors

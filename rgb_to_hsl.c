@@ -17,16 +17,16 @@
 void rgb_to_hsl(DCELL *rowbuffer[3], int columns, double max_level)
 
 {
-    int column;         /* column indicator               */
-    double red;         /* the red band output            */
-    double green;       /* the green band output          */
-    double blue;        /* the blue band output           */
-    double min;         /* minimum among red, green, blue */
-    double max;         /* maximum among red, green, blue */
-    float chroma;       /* chrome, intermediate value     */
-    float lightness;    /* lightness                      */
-    float saturation;   /* saturation                     */
-    float hue = 0.0L;   /* hue                            */
+    int column;         // column indicator
+    double red;         // the red band output
+    double green;       // the green band output
+    double blue;        // the blue band output
+    double min;         // minimum among red, green, blue
+    double max;         // maximum among red, green, blue
+    float chroma;       // chrome, intermediate value
+    float lightness;    // lightness
+    float saturation;   // saturation
+    float hue = 0.0L;   // hue
 
 for (column = 0; column < columns; column++) {
 
@@ -78,6 +78,7 @@ for (column = 0; column < columns; column++) {
 
 
     /* if R == G == B, then min == max, which is achromatic */
+
     if (chroma == 0.0) {
 
         saturation = 0.0;
@@ -88,6 +89,7 @@ for (column = 0; column < columns; column++) {
     }
 
     /*  else chromatic */
+
     else if (chroma != 0.0) {
 
         saturation = chroma / (1.0 - fabs(2.0 * lightness - 1.0));
@@ -102,9 +104,11 @@ for (column = 0; column < columns; column++) {
             hue = ((red - green) / chroma) + 4.0;
 
         /* convert hue to degrees */
+
         hue *= 60.0;
 
         /* make nonnegative */
+
         if (hue < 0.0)
             hue += 360.0;
 

@@ -26,6 +26,7 @@ void rgb_to_hsl(DCELL *rowbuffer[3], unsigned int columns, double max_level)
     float chroma;       // chrome, intermediate value
     float lightness;    // lightness
     float saturation;   // saturation
+    int negative_value; // flag to warn if out of range value detected
     float hue = 0.0L;   // hue
 
 for (column = 0; column < columns; column++) {
@@ -130,10 +131,15 @@ for (column = 0; column < columns; column++) {
     }
 
     /* set saturation, lightness */
+    if (saturation < 0)
+        negative_value = 1;
     rowbuffer[1][column] = (FCELL)saturation;
     rowbuffer[2][column] = (FCELL)lightness;
 
     G_debug(3, "Output rowbuffers 0, 1, 2: %f, %f, %f\n",
             rowbuffer[0][column], rowbuffer[1][column], rowbuffer[2][column]);
   }
+// move this to main, emmit only once!
+if (negative_value == 1)
+    G_warning("Detected a negative Saturation value. Is the bits setting correct?");
 }

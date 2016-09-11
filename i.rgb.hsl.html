@@ -1,5 +1,6 @@
 <h2 id="description">DESCRIPTION</h2>
-<p><em>i.rgb.his</em> is an image processing program that processes three input raster map layers as red, green, and blue components and produces three output raster map layers representing the hue, intensity, and saturation of the data. The output raster map layers are created by a standard red-green-blue (RGB) to hue-intensity-saturation (HIS) color transformation. Each output raster map layer is given a linear gray scale color table. The current geographic region definition and mask settings are respected.</p>
+<p><em>i.rgb.hsl</em> converts three input images red, green and blue, being components in the RGB color space, into hue, saturation and lightness dimensions of the HSL color space.</p>
+<p>Each output image is given a linear gray scale color table. The current geographic region and mask settings are respected.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h2 id="bit">8-bit</h2>
 <p>The digital numbers of the 8-bit Landsat 7 bands red, green and blue, range between 0 and 255:</p>
@@ -27,11 +28,11 @@ green: min=28 max=255
 blue: min=42 max=255</code></pre>
 <h2 id="bit-1">11-bit</h2>
 <p>For 11-bit sensors, like QuickBird2 [0], set <code>bits=11</code>. For example:</p>
-<pre><code>i.rgb.his r=Red g=Green bl=Blue h=h s=s l=l bit_depth=11 --o</code></pre>
+<pre><code>i.rgb.hsl r=Red g=Green bl=Blue h=hue s=saturation l=lightness bits=11</code></pre>
 <h2 id="bit-2">16-bit</h2>
 <p>The Landsat 8 instruments OLI and TIRS are capable of 12-bit. Products are, however, delivered as 16-bit images (scaled to 55,000 grey levels). [0]</p>
 <p>Therefore, <em>bitness</em> needs to be set to 16, like:</p>
-<pre><code>i.rgb.his red=B4.hpf green=B3.hpf blue=B2.hpf h=h s=s l=l bit=16</code></pre>
+<pre><code>i.rgb.hsl red=B4 green=B3 blue=B2 h=hue s=saturation l=lightness bits=16</code></pre>
 <h2 id="arbitrary-lower-bit-depths">Arbitrary lower bit depths</h2>
 <p>The module allows for data of less than 8-bit. For example, data from the DMSP Operational Linescan System (OLS) nighttime lights time series, which feature 6-bit sensors [2].</p>
 <p>For example:</p>

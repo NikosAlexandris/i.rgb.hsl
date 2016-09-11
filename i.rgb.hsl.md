@@ -1,14 +1,12 @@
 DESCRIPTION
 -----------
 
-*i.rgb.his* is an image processing program that processes three input
-raster map layers as red, green, and blue components and produces three
-output raster map layers representing the hue, intensity, and saturation
-of the data. The output raster map layers are created by a standard
-red-green-blue (RGB) to hue-intensity-saturation (HIS) color
-transformation. Each output raster map layer is given a linear gray
-scale color table. The current geographic region definition and mask
-settings are respected.
+*i.rgb.hsl* converts three input images red, green and blue, being
+components in the RGB color space, into hue, saturation and lightness
+dimensions of the HSL color space.
+
+Each output image is given a linear gray scale color table. The current
+geographic region and mask settings are respected.
 
 EXAMPLES
 --------
@@ -66,7 +64,7 @@ blue: min=42 max=255
 For 11-bit sensors, like QuickBird2 [0], set `bits=11`. For example:
 
 ```
-i.rgb.his r=Red g=Green bl=Blue h=h s=s l=l bit_depth=11 --o
+i.rgb.hsl r=Red g=Green bl=Blue h=hue s=saturation l=lightness bits=11
 ```
 
 
@@ -78,7 +76,7 @@ however, delivered as 16-bit images (scaled to 55,000 grey levels). [0]
 Therefore, *bitness* needs to be set to 16, like:
 
 ```
-i.rgb.his red=B4.hpf green=B3.hpf blue=B2.hpf h=h s=s l=l bit=16
+i.rgb.hsl red=B4 green=B3 blue=B2 h=hue s=saturation l=lightness bits=16
 ```
 
 ## Arbitrary lower bit depths

@@ -31,8 +31,10 @@
 
 int main(int argc, char **argv)
 {
-    long row;                       // long is 32-/64-bit, ~4 billion/~18 qunitillion
-    int band, rows, cols;           // input band counter, number of rows, columns
+    unsigned long row;      // long is 32-/64-bit, ~4 billion/~18 qunitillion
+    unsigned int bands;     // input band counter
+    unsigned int rows;      // input number of rows
+    unsigned int cols;      // input columns
     DCELL *rowbuffer[3];
     struct Option *opt_red;
     struct Option *opt_green;
@@ -41,13 +43,13 @@ int main(int argc, char **argv)
     struct Option *opt_saturation;
     struct Option *opt_lightness;
     struct Option *opt_bits;
-    struct GModule *module;         // GRASS module for parsing arguments
-    int fd_input[3];                // input file descriptors
-    int fd_output[3];               // output file descriptors
-    int bits;                       // bitness of input raster maps
-    double max_colors;              // maximum level based on input bitness
+    struct GModule *module; // GRASS module for parsing arguments
+    int fd_input[3];        // input file descriptors
+    int fd_output[3];       // output file descriptors
+    int bits;               // bitness of input raster maps
+    double max_colors;      // maximum level based on input bitness
 
-    G_gisinit(argv[0]);             // initialize GIS engine
+    G_gisinit(argv[0]);     // initialize GIS engine
 
     /* Set description */
     module = G_define_module();
@@ -57,7 +59,7 @@ int main(int argc, char **argv)
     G_add_keyword("red");
     G_add_keyword("green");
     G_add_keyword("blue");
-    G_add_keyword("HSL");           // Lightness, Luminosity or Luminance
+    G_add_keyword("HSL");   // Lightness, Luminosity or Luminance
     G_add_keyword("hue");
     G_add_keyword("saturation");
     G_add_keyword("lightness");
